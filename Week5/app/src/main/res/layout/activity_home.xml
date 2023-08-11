@@ -82,6 +82,7 @@
                 android:layout_height="50dp"
                 android:background="@null"
                 android:gravity="center"
+                android:duplicateParentState="true"
                 android:src="@drawable/selector_emoticon2" />
 
             <TextView
@@ -91,6 +92,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="종료"
+                android:duplicateParentState="true"
                 android:textColor="@drawable/selector_text"
                 android:textStyle="bold" />
         </LinearLayout>

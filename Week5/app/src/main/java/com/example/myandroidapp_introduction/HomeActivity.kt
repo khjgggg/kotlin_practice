@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.example.myandroidapp_introduction.R.*
@@ -19,8 +20,8 @@ class HomeActivity : AppCompatActivity() {
         val textViewId = findViewById<TextView>(R.id.textViewId)
         textViewId.text = "아이디 : $id"
 
-        val btnEnd = findViewById<TextView>(R.id.btnEnd)
-        btnEnd.setOnClickListener{
+        val btnlayout = findViewById<LinearLayout>(R.id.btnEnd1)
+        btnlayout.setOnClickListener{
            finish()
         }
 
