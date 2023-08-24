@@ -15,7 +15,7 @@ import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: RidoLoveMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
