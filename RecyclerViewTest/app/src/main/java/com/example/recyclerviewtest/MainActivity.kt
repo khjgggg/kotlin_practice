@@ -33,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)
         adapter.itemClick = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                val name = dataList[position].aName
+                val size = dataList.size
+                val name = dataList[size-position-1].aName
                 Toast.makeText(this@MainActivity, "$name 선택!!!!!!", Toast.LENGTH_SHORT).show()
             }
         }
