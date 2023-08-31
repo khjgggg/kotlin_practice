@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                 description = "My Channel One Description"
                 setShowBadge(true)
                 val uri: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+                //안드로이드 기본사운드
                 val audioAttributes = AudioAttributes.Builder()
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .setUsage(AudioAttributes.USAGE_ALARM)
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             builder = NotificationCompat.Builder(this)
         }
 
-        val bitmap = BitmapFactory.decodeResource(resources, android.R.drawable.ic_menu_add)
+        val bitmap = BitmapFactory.decodeResource(resources,R.drawable.board)
         val intent = Intent(this, SecondActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         val pendingIntent = PendingIntent.getActivity(
@@ -91,15 +92,15 @@ class MainActivity : AppCompatActivity() {
             setContentText("알림이 잘 보이시나요.")
             setContentIntent(pendingIntent)
             priority = NotificationCompat.PRIORITY_HIGH
-            setStyle(
-                NotificationCompat.BigTextStyle()
-                    .bigText("이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.")
-            )
+//            setStyle(
+//                NotificationCompat.BigTextStyle()
+//                    .bigText("이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.")
+//            )
             setLargeIcon(bitmap)
-//            setStyle(NotificationCompat.BigPictureStyle()
-//                    .bigPicture(bitmap)
-//                    .bigLargeIcon(null))  // hide largeIcon while expanding
-            addAction(R.mipmap.ic_launcher, "Action", pendingIntent)
+            setStyle(NotificationCompat.BigPictureStyle()
+                    .bigPicture(bitmap)
+                    .bigLargeIcon(null))  // hide largeIcon while expanding
+            addAction(R.mipmap.ic_launcher, "두번째 액티비티 가기", pendingIntent)
         }
 
 
