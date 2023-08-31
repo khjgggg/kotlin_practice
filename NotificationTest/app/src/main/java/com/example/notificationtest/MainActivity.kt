@@ -26,19 +26,27 @@ class MainActivity : AppCompatActivity() {
 
         checkPermission()
 
-        binding.notificationButton.setOnClickListener{
+        binding.notificationButton.setOnClickListener {
             notification()
         }
+
+        binding.radioGroup.setOnCheckedChangeListener { _, i ->
+            onRadioButtonClicked(i)
+        }
+
+        //고화질 저화질
+        //진동/소리 소리 진동 무음
+        //30초 1분 2분 3분
     }
 
-    fun notification(){
+    fun notification() {
         val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         val builder: NotificationCompat.Builder
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // 26 버전 이상
-            val channelId="one-channel"
-            val channelName="My Channel One"
+            val channelId = "one-channel"
+            val channelName = "My Channel One"
             val channel = NotificationChannel(
                 channelId,
                 channelName,
@@ -61,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             // 채널을 이용하여 builder 생성
             builder = NotificationCompat.Builder(this, channelId)
 
-        }else {
+        } else {
             // 26 버전 이하
             builder = NotificationCompat.Builder(this)
         }
@@ -69,7 +77,12 @@ class MainActivity : AppCompatActivity() {
         val bitmap = BitmapFactory.decodeResource(resources, android.R.drawable.ic_menu_add)
         val intent = Intent(this, SecondActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
         // 알림의 기본 정보
         builder.run {
             setSmallIcon(R.mipmap.ic_launcher)
@@ -78,8 +91,10 @@ class MainActivity : AppCompatActivity() {
             setContentText("알림이 잘 보이시나요.")
             setContentIntent(pendingIntent)
             priority = NotificationCompat.PRIORITY_HIGH
-            setStyle(NotificationCompat.BigTextStyle()
-                .bigText("이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다."))
+            setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText("이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.이것은 긴텍스트 샘플입니다. 아주 긴 텍스트를 쓸때는 여기다 하면 됩니다.")
+            )
             setLargeIcon(bitmap)
 //            setStyle(NotificationCompat.BigPictureStyle()
 //                    .bigPicture(bitmap)
@@ -96,7 +111,11 @@ class MainActivity : AppCompatActivity() {
     private fun checkPermission() {
         val permissions = getPermissions()
         for (permission in permissions) {
-            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 requestPermissions(permissions, ACTIVITY_REQUEST_PERMISSION)
                 return
             }
@@ -129,17 +148,35 @@ class MainActivity : AppCompatActivity() {
             var isGrantedNoti = false
             for (index in grantResults.indices) {
                 if (permissions[index] == android.Manifest.permission.POST_NOTIFICATIONS
-                    && grantResults[index] == PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[index] == PackageManager.PERMISSION_GRANTED
+                ) {
                     isGrantedNoti = true
                 }
             }
 
-            if(!isGrantedNoti) {
+            if (!isGrantedNoti) {
                 Toast.makeText(this, "알림 권한이 필요합니다. 설정에서 알림 권한을 켜주세요.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
 
+    private fun onRadioButtonClicked(checkId: Int) = when (checkId) {
+        R.id.radioButton -> {
+            binding.radioButton2.setBackgroundResource(R.drawable.selector_radio_button_last)
+            binding.radioButton3.setBackgroundResource(R.drawable.selector_radio_button_last)
+        }
+
+        R.id.radioButton2 -> {
+            binding.radioButton.setBackgroundResource(R.drawable.selector_radio_button_first)
+            binding.radioButton3.setBackgroundResource(R.drawable.selector_radio_button_last)
+        }
+
+        R.id.radioButton3 -> {
+            binding.radioButton.setBackgroundResource(R.drawable.selector_radio_button_first)
+            binding.radioButton2.setBackgroundResource(R.drawable.selector_radio_button_first)
+        }
+        else -> {}
+    }
 
 }
