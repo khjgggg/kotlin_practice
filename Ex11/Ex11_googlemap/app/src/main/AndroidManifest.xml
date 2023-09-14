@@ -19,7 +19,8 @@
 
         <uses-library android:name="org.apache.http.legacy" android:required="true"/>
         <meta-data android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAmD-FTE_hveFfGH-c0gEoZbXvhm1EsaD4"/>
+            android:value="키넣으세요"/>
+        키넣으세요
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
